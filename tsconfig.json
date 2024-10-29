@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+      /* Language and Environment */
+      "target": "es2022",                                // Use latest ES features, including async/await
+      "lib": ["es2022", "dom"],                          // Include standard ES and DOM libraries
+      "module": "esnext",                                // Enable ECMAScript modules
+      "moduleResolution": "node",                        // Resolve modules in Node.js style
+      "allowSyntheticDefaultImports": true,              // Support synthetic default imports
+      "esModuleInterop": true,                           // Enable interoperability between CommonJS and ES modules
+      "forceConsistentCasingInFileNames": true,          // Enforce case-sensitive imports
+  
+      /* Type Checking */
+      "strict": true,                                    // Enable all strict type-checking options
+      "skipLibCheck": true,                              // Skip type checking for library files
+  
+      /* Emit */
+      "declaration": true,                               // Generate declaration files
+      "declarationMap": true,                            // Map declarations for debugging
+      "sourceMap": true,                                 // Generate source maps for debugging
+      "outDir": "./dist",                                // Output directory for compiled files
+      "removeComments": true,                            // Remove comments in output files
+  
+      /* Interop Constraints */
+      "isolatedModules": true,                           // Ensure safe transpilation for each module independently
+  
+      /* Additional */
+      "resolveJsonModule": true,                         // Allow importing .json files
+},
+    "include": ["src/**/*.ts"],                          // Specify files to include in compilation
+    "exclude": ["node_modules"]                          // Exclude dependencies
+  }
+  
