@@ -3,9 +3,9 @@ import type { FormRequestBody } from '../routes/api.routes'; // Import the type
 
 // Create a reference object that matches the interface
 const formRequestReference: FormRequestBody = {
-  email: '',
+  sentToEmail: '',
   subject: '',
-  message: ''
+  text: ''
 };
 
 export const validateRequestBody = (

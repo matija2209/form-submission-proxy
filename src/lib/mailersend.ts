@@ -7,14 +7,14 @@ interface EmailOptions {
   text: string;
 }
 
-export async function sendMailerSendEmail(options: EmailOptions) {
+export async function sendMailerSendEmail(sender: string, senderName: string, options: EmailOptions) {
   const mailerSend = new MailerSend({
-    apiKey: process.env.MAILERSEND_API_KEY as string,
+    apiKey: process.env.MAILERSEND_API_KEY_EGOSTITELJ as string,
   });
 
   const sentFrom = new Sender(
-    "forms@schnellsite.de",
-    "SchnellSite Form"
+    sender,
+    senderName
   );
   const recipients = [new Recipient(options.to, "Recipient")];
 
@@ -26,12 +26,8 @@ export async function sendMailerSendEmail(options: EmailOptions) {
     .setHtml(options.html)
     .setText(options.text);
 
-  try {
-    await mailerSend.email.send(emailParams);
-    console.log("Email sent successfully");
-    return { success: true, message: "Email sent successfully" };
-  } catch (error) {
-    console.error("Error sending email:", error);
-    return { success: false, message: "Failed to send email" };
-  }
+  await mailerSend.email.send(emailParams);
+  console.log("Email sent successfully");
+  return { success: true, message: "Email sent successfully" };
+
 }

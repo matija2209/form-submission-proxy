@@ -1,6 +1,7 @@
 import express, { Request, Response, Router,RequestHandler } from 'express';
 import { formPostController } from '../controllers/form.controllers';
 import { validateRequestBody } from '../middleware/validateForm.middleware';
+import { asyncWrapper } from '../utils/asyncWrapper';
 
 const apiRouter: Router = express.Router();
 
@@ -9,11 +10,13 @@ apiRouter.get('/', (req: Request, res: Response) => {
 });
 
 export interface FormRequestBody {
-  email: string;
+  senderEmail?: string;
+  senderName?: string;
+  sentToEmail: string;
   subject: string;
-  message: string;
+  text: string;
 }
 
-apiRouter.post<{}, {}, FormRequestBody>('/',  [validateRequestBody], formPostController);
+apiRouter.post<{}, {}, FormRequestBody>('/',  [validateRequestBody], asyncWrapper(formPostController));
 
 export default apiRouter

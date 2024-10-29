@@ -9,6 +9,7 @@ import rateLimit from 'express-rate-limit';
 import { randomUUID } from 'crypto';
 import session from 'express-session';
 import jwt from 'jsonwebtoken';
+
 dotenv.config();
 
 const app: Express = express();
@@ -26,7 +27,23 @@ const port = process.env.PORT || 3000;
 
 // Middleware
 
-app.use(cors());
+// CORS configuration
+const allowedOrigins = ['http://localhost:3000', 'http://localhost:5173', 'https://schnellsite.de'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true // if you're using cookies or authentication
+}));
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -45,21 +62,21 @@ app.use(session({
   }));
   
 // JWT Authentication Middleware
-const authenticateJWT = (req: Request, res: Response, next: NextFunction) => {
-const token = req.headers.authorization?.split(' ')[1];
+// const authenticateJWT = (req: Request, res: Response, next: NextFunction) => {
+// const token = req.headers.authorization?.split(' ')[1];
 
-if (!token) {
-    return res.status(401).json({ message: 'No token provided' });
-}
+// if (!token) {
+//     return res.status(401).json({ message: 'No token provided' });
+// }
 
-try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
-    req.user = decoded;
-    next();
-} catch (err) {
-    return res.status(403).json({ message: 'Invalid token' });
-}
-};
+// try {
+//     const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
+//     req.user = decoded;
+//     next();
+// } catch (err) {
+//     return res.status(403).json({ message: 'Invalid token' });
+// }
+// };
 
 // Routes
 app.use('/form', apiRouter);
@@ -71,6 +88,9 @@ app.use(errorHandler);
 app.get('/health', (req: Request, res: Response) => {
   res.status(200).json({ status: 'ok' });
 });
+
+
+
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
