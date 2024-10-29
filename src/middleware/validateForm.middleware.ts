@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import type { FormRequestBody } from '../routes/api.routes'; // Import the type
+import type { FormRequestBody } from '../routes/api.routes.js'; // Import the type
 
 // Create a reference object that matches the interface
 const formRequestReference: FormRequestBody = {

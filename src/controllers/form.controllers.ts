@@ -1,6 +1,6 @@
 import { Request, Response,RequestHandler } from "express";
-import { sendMailerSendEmail } from "../lib/mailersend";
-import { FormRequestBody } from "../routes/api.routes";
+import { sendMailerSendEmail } from "../lib/mailersend.js";
+import { FormRequestBody } from "../routes/api.routes.js";
 
 
 

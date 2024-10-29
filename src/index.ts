@@ -1,8 +1,8 @@
 import express, { Express, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import apiRouter from './routes/api.routes';
-import { errorHandler } from './middleware/errorHandler';
+import apiRouter from './routes/api.routes.js';
+import { errorHandler } from './middleware/errorHandler.js';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';

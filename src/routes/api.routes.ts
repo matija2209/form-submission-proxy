@@ -1,7 +1,7 @@
 import express, { Request, Response, Router,RequestHandler } from 'express';
-import { formPostController } from '../controllers/form.controllers';
-import { validateRequestBody } from '../middleware/validateForm.middleware';
-import { asyncWrapper } from '../utils/asyncWrapper';
+import { formPostController } from '../controllers/form.controllers.js';
+import { validateRequestBody } from '../middleware/validateForm.middleware.js';
+import { asyncWrapper } from '../utils/asyncWrapper.js';
 
 const apiRouter: Router = express.Router();
 
