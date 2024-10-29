@@ -9,7 +9,7 @@ interface EmailOptions {
 
 export async function sendMailerSendEmail(sender: string, senderName: string, options: EmailOptions) {
   const mailerSend = new MailerSend({
-    apiKey: process.env.MAILERSEND_API_KEY_EGOSTITELJ as string,
+    apiKey: process.env.MAILERSEND_API_KEY_SCHNELLSITE as string,
   });
 
   const sentFrom = new Sender(

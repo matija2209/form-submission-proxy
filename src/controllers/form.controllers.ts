@@ -11,7 +11,7 @@ export const formPostController = async (
   const { sentToEmail, subject, text } = req.body;
   const { senderEmail, senderName } = req.body;
   const html = textToHTML(text);
-  await sendMailerSendEmail("noreply@egostitelj.si", "SchnellSite Form Submission", { to: sentToEmail, subject, html, text });
+  await sendMailerSendEmail("noreply@schnellsite.de", "SchnellSite Form Submission", { to: sentToEmail, subject, html, text });
   res.json({ message: 'Email sent successfully' });
 };
 
