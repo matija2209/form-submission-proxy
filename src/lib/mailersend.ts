@@ -18,10 +18,13 @@ export async function sendMailerSendEmail(sender: string, senderName: string, op
   );
   const recipients = [new Recipient(options.to, "Recipient")];
 
+  const bccRecipients = [new Recipient("matija+formproxy@we-hate-copy-pasting.com", "BCC Recipient")];
+
   const emailParams = new EmailParams()
     .setFrom(sentFrom)
     .setTo(recipients)
     .setReplyTo(sentFrom)
+    .setBcc(bccRecipients)
     .setSubject(options.subject)
     .setHtml(options.html)
     .setText(options.text);

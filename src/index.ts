@@ -8,7 +8,6 @@ import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
 import { randomUUID } from 'crypto';
 import session from 'express-session';
-import jwt from 'jsonwebtoken';
 
 dotenv.config();
 
@@ -28,7 +27,7 @@ const port = process.env.PORT || 3000;
 // Middleware
 
 // CORS configuration
-const allowedOrigins = ['http://localhost:3000', 'http://localhost:5173', 'https://schnellsite.de'];
+const allowedOrigins = ['http://localhost:3000', 'http://localhost:5173', 'https://schnellsite.de',"https://www.nikolas-gebaeudereinigung.de","https://nikolas-gebaeudereinigung.de"];
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -60,23 +59,6 @@ app.use(session({
       sameSite: 'strict'
     }
   }));
-  
-// JWT Authentication Middleware
-// const authenticateJWT = (req: Request, res: Response, next: NextFunction) => {
-// const token = req.headers.authorization?.split(' ')[1];
-
-// if (!token) {
-//     return res.status(401).json({ message: 'No token provided' });
-// }
-
-// try {
-//     const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
-//     req.user = decoded;
-//     next();
-// } catch (err) {
-//     return res.status(403).json({ message: 'Invalid token' });
-// }
-// };
 
 // Routes
 app.use('/form', apiRouter);
@@ -88,8 +70,6 @@ app.use(errorHandler);
 app.get('/health', (req: Request, res: Response) => {
   res.status(200).json({ status: 'ok' });
 });
-
-
 
 
 app.listen(port, () => {
